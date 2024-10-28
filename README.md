@@ -1,4 +1,3 @@
-```markdown
 # Weather App 🌦️
 
 A simple Django-based weather application that fetches and displays weather data for cities using the OpenWeatherMap API. This project was developed to showcase skills in web development with Django and API integration.
