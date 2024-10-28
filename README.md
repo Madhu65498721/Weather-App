@@ -22,7 +22,7 @@ Check out the live demo of the app here:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/weatherapp.git
+   git clone https://github.com/Madhu65498721/Weather-App.git
    ```
 2. Navigate into the project directory:
    ```bash
