@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #00c6ff, #0072ff); /* Gradient background */
+            font-family: 'Arial', sans-serif;
+            color: #000000; /* Changed text color to black */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        nav {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px rgba(226, 213, 213, 0.5);
+        }
+
+        h2 {
+            margin: 5px 0;
+            font-size: 1.5em;
+            color: #ffffff; /* Keeping the subtitle text white for contrast */
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 600px; /* Maximum width */
+            margin: auto; /* Center the container */
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex; /* Flexbox for better alignment */
+            justify-content: center; /* Center the input and button */
+        }
+
+        .form-control {
+            border-radius: 30px 0 0 30px; /* Rounded left side */
+            border: 1px solid #007BFF; /* Blue border */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 1.2em;
+        }
+
+        .input-group-btn .btn {
+            border-radius: 0 30px 30px 0; /* Rounded right side */
+            background: #007BFF; /* Bootstrap primary color */
+            color: white;
+            font-size: 1.2em;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .input-group-btn .btn:hover {
+            background: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly scale up */
+        }
+
+        .weather-info {
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px; /* Space between the search bar and info */
+            width: 100%;
+            max-width: 725px; /* Maximum width */
+        }
+
+        .weather-info h3 {
+            font-size: 1.5em; /* Decrease font size for h3 */
+        }
+
+        .icon {
+            font-size: 30px; /* Icon size */
+            margin-right: 10px;
+            color: #007BFF; /* Bootstrap primary color */
+        }
+
+        footer {
+            margin-top: 20px; /* Space above footer */
+            color: #ffffff;
+            font-size: 1em;
+            text-align: center;
+            width: 100%;
+        }
+
+        .signature {
+            font-weight: bold;
+            color: #007BFF; /* Bootstrap primary color */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            .form-control {
+                font-size: 1em;
+            }
+
+            .input-group-btn .btn {
+                font-size: 1em;
+            }
+
+            .weather-info h3 {
+                font-size: 1.2em; /* Decrease font size for mobile */
+            }
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <nav>
+        <h1 style="color: #ffffff;">Weather App</h1>
+        <h2>Discover the weather conditions in your city</h2>
+    </nav>
+
+    <div class="search-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" class="form-control" name="city" placeholder="Search for a city...">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% elif city and country_code and longitude and latitude and temp and humidity and description and speed and temperature_fahrenheit %}
+        <div class="weather-info">
+            <h3><i class="icon fas fa-sun"></i> City: {{ city }}</h3>
+            <h3><i class="icon fas fa-flag"></i> Country Code: {{ country_code }}</h3>
+            <h3><i class="icon fas fa-thermometer-half"></i> Temp: {{ temp }} °C / {{ temperature_fahrenheit }} °F</h3>
+            <h3><i class="icon fas fa-tint"></i> Humidity: {{ humidity }}%</h3>
+            <h3><i class="icon fas fa-cloud"></i> Description: {{ description }}</h3>
+            <h3><i class="icon fas fa-wind"></i> Speed: {{ speed }} m/s</h3>
+            <h3><i class="icon fas fa-map-marker-alt"></i> Coordinates: Longitude - {{ longitude }}, Latitude - {{ latitude }}</h3>
+        </div>
+        {% endif %}
+    </div>
+    
+
+    <footer>
+       <div class="signature" style="color: whitesmoke;">Created by Madhu</div>
+        </footer>
+</body>
+
+</html>
